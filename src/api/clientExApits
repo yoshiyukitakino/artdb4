@@ -1,0 +1,23 @@
+import { Client } from '@/type';
+import React from 'react'
+
+export const getAllClients = async (): Promise<Client[]> => {
+    const res = await fetch('http://localhost:3001/clients',
+        { cache: 'no-cache' });  //SSR
+    return res.json()
+};
+
+export const addClient = async (client: Client): Promise<Client[]> => {
+    const res = await fetch('http://localhost:3001/clients',
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(client)
+
+        });
+    const newClient = res.json();
+    return newClient
+};
+
